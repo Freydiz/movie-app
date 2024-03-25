@@ -8,7 +8,7 @@ export const Header = () => {
   );
 };
 
-const Root = styled.div`
+const Root = styled.header`
   padding: 16px;
   color: #fff;
   background-color: #000;

@@ -1,16 +1,16 @@
-import { Container, Footer, Header, Search } from './components';
+import { Container, Content, Footer, Header, Search } from './components';
 import { GlobalStyles } from './assets';
 
 function App() {
   return (
-    <>
+    <Container>
       <GlobalStyles />
       <Header />
-      <Container>
+      <Content>
         <Search />
-      </Container>
+      </Content>
       <Footer />
-    </>
+    </Container>
   );
 }
 

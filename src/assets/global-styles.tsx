@@ -23,7 +23,7 @@ h1, h2, h3 {
 
 h1 {
   font-size: 1.625rem;
-  line-height: 2mre;
+  line-height: 2rem;
 
   @media only screen and (min-width: 993px) {
     font-size: 2.25rem;
