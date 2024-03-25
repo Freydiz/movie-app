@@ -1,7 +1,17 @@
-import React from 'react';
+import { Container, Footer, Header, Search } from './components';
+import { GlobalStyles } from './assets';
 
 function App() {
-  return <div>App</div>;
+  return (
+    <>
+      <GlobalStyles />
+      <Header />
+      <Container>
+        <Search />
+      </Container>
+      <Footer />
+    </>
+  );
 }
 
 export default App;
