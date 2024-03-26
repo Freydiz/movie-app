@@ -1,16 +1,16 @@
-import { Container, Content, Footer, Header, Search } from './components';
-import { GlobalStyles } from './assets';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Layout, Home, MovieDetailPage } from './pages';
 
 function App() {
   return (
-    <Container>
-      <GlobalStyles />
-      <Header />
-      <Content>
-        <Search />
-      </Content>
-      <Footer />
-    </Container>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="details" element={<MovieDetailPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

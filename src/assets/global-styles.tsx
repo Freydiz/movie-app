@@ -2,8 +2,6 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
 
-@import url('https://fonts.googleapis.com/css?family=Lato:100,400,800|Montserrat:500i&display=swap');
-
  * {
    margin: 0;
    padding: 0;
