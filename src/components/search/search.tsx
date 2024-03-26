@@ -20,11 +20,19 @@ export const Search: React.FC<Props> = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <Input type="text" placeholder="Search for movies..." value={query} onChange={handleInputChange} />
-    </form>
+    </Form>
   );
 };
+
+const Form = styled.form`
+  width: 100%;
+
+  @media only screen and (min-width: 993px) {
+    width: 500px;
+  }
+`;
 
 const Input = styled.input`
   width: 100%;

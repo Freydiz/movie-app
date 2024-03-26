@@ -1,6 +1,7 @@
 export const fetchMovies = async (searchQuery: string) => {
   try {
-    const url = `https://api.themoviedb.org/3/search/movie?api_key=7741135f64976e07481862591cde71c2&query=${searchQuery}&include_adult=false&language=en-US&page=1`;
+    const apiKey = process.env.REACT_APP_MOVIE_DB_API_KEY;
+    const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchQuery}&include_adult=false&language=en-US`;
     const response = await fetch(url);
 
     if (!response.ok) {

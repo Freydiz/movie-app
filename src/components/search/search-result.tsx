@@ -1,7 +1,8 @@
+import { Link } from 'react-router-dom';
+
 interface Movie {
   id: number;
   title: string;
-  // Add any other movie properties you need
 }
 
 interface SearchResultProps {
@@ -13,7 +14,9 @@ export const SearchResult: React.FC<SearchResultProps> = (props) => {
   return (
     <ul>
       {movies.map((movie) => (
-        <li key={movie.id}>{movie.title}</li>
+        <li key={movie.id}>
+          <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
+        </li>
       ))}
     </ul>
   );

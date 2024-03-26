@@ -52,4 +52,8 @@ h3 {
 p {
   line-height: 1.5;
 }
+
+li {
+  list-style: none;
+} 
 `;

@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
 import { Search, SearchResult } from '../components';
 import { useState } from 'react';
 import { fetchMovies } from '../services/fetch-movies';
+import styled from 'styled-components';
 
 export const Home = () => {
   const [movies, setMovies] = useState([]);
@@ -13,11 +13,18 @@ export const Home = () => {
   };
 
   return (
-    <>
+    <Root>
       <Search onSearch={handleSearch} />
-      <SearchResult movies={movies} />
 
-      <Link to="details">Movie Details</Link>
-    </>
+      <SearchResult movies={movies} />
+    </Root>
   );
 };
+
+const Root = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+`;
