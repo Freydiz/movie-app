@@ -1,23 +1,44 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { MovieCard } from '../movie-card';
+import { useMovies } from '../../contexts';
+import styled from 'styled-components';
 
-interface Movie {
-  id: number;
-  title: string;
-}
+export const SearchResult: React.FC = () => {
+  const { movies } = useMovies();
 
-interface SearchResultProps {
-  movies: Movie[];
-}
-
-export const SearchResult: React.FC<SearchResultProps> = (props) => {
-  const { movies } = props;
   return (
-    <ul>
+    <Grid>
       {movies.map((movie) => (
         <li key={movie.id}>
-          <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
+          <Link to={`/movie/${movie.id}`}>
+            <MovieCard movie={movie} />
+          </Link>
         </li>
       ))}
-    </ul>
+    </Grid>
   );
 };
+
+const Grid = styled.ul`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  @media (min-width: 993px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  li {
+    display: flex;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+  }
+`;

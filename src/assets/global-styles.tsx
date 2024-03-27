@@ -11,6 +11,7 @@ export const GlobalStyles = createGlobalStyle`
 body {
   font-size: 100%;
   font-family: 'Lato', sans-serif;
+  font-weight: 300;
 }
 
 h1, h2, h3 {
@@ -23,7 +24,7 @@ h1 {
   font-size: 1.625rem;
   line-height: 2rem;
 
-  @media only screen and (min-width: 993px) {
+  @media (min-width: 993px) {
     font-size: 2.25rem;
     line-height: 2.5rem;
   }
@@ -33,7 +34,7 @@ h2 {
   font-size: 1.375rem;
   line-height: 2rem;
 
-  @media only screen and (min-width: 993px) {
+  @media (min-width: 993px) {
     font-size: 1.625rem;
     line-height: 2rem;
   }
@@ -43,11 +44,17 @@ h3 {
   font-size: 1.125rem;
   line-height: 1.5rem;
 
-  @media only screen and (min-width: 993px) {
+  @media (min-width: 993px) {
     font-size: 1.25rem;
     line-height: 1.5rem;
   }
 }
+
+a {
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+  }
 
 p {
   line-height: 1.5;

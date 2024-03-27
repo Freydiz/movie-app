@@ -1,22 +1,19 @@
 import { Search, SearchResult } from '../components';
-import { useState } from 'react';
 import styled from 'styled-components';
-import { movieService } from '../services';
+import { useMovies } from '../contexts';
 
 export const Home = () => {
-  const [movies, setMovies] = useState([]);
+  const { fetchMovies } = useMovies();
 
   const handleSearch = async (query: string) => {
     if (!query) return;
-    const results = await movieService.fetchMovies(query);
-    setMovies(results);
+    await fetchMovies(query);
   };
 
   return (
     <Root>
       <Search onSearch={handleSearch} />
-
-      <SearchResult movies={movies} />
+      <SearchResult />
     </Root>
   );
 };

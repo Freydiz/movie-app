@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { movieService } from '../services';
+import styled from 'styled-components';
 
 interface Movie {
   id: number;
   title: string;
   overview: string;
+  backdrop_path: string;
 }
 
 export const MovieDetailPage: React.FC = () => {
@@ -35,9 +37,28 @@ export const MovieDetailPage: React.FC = () => {
   if (!movie) return <div>Loading...</div>;
 
   return (
-    <div>
-      <h1>{movie.title}</h1>
-      <p>{movie.overview}</p>
-    </div>
+    <Root>
+      <Image src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`} alt={movie.title} />
+      <Column>
+        <h1>{movie.title}</h1>
+        <p>{movie.overview}</p>
+      </Column>
+    </Root>
   );
 };
+
+const Root = styled.div`
+  display: flex;
+  gap: 16px;
+`;
+
+const Image = styled.img`
+  width: auto;
+  height: 300px;
+`;
+
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;

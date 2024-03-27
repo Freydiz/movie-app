@@ -29,7 +29,7 @@ export const Search: React.FC<Props> = (props) => {
 const Form = styled.form`
   width: 100%;
 
-  @media only screen and (min-width: 993px) {
+  @media (min-width: 993px) {
     width: 500px;
   }
 `;

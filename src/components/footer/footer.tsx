@@ -13,5 +13,5 @@ const Root = styled.footer`
   justify-content: center;
   padding: 16px;
   color: #fff;
-  background-color: #000;
+  background-color: #003366;
 `;
