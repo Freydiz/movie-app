@@ -1,10 +1,11 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Logo } from '../../assets';
 
 export const Header = () => {
   return (
     <Root>
-      <LogoWrapper>
+      <LogoWrapper to="/">
         <Logo />
       </LogoWrapper>
       <h1>What2Watch</h1>
@@ -22,7 +23,8 @@ const Root = styled.header`
   background-color: #003366;
 `;
 
-const LogoWrapper = styled.div`
+const LogoWrapper = styled(Link)`
+  cursor: pointer;
   width: 50px;
   height: auto;
 
