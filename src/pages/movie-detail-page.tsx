@@ -1,47 +1,29 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { movieService } from '../services';
 import styled from 'styled-components';
-
-interface Movie {
-  id: number;
-  title: string;
-  overview: string;
-  backdrop_path: string;
-}
+import { useMovies } from '../contexts';
 
 export const MovieDetailPage: React.FC = () => {
   const { id } = useParams<string>();
-  const [movie, setMovie] = useState<Movie | null>(null);
+  const { selectedMovie, fetchMovieDetails } = useMovies();
 
   useEffect(() => {
-    const fetchDetails = async () => {
-      if (id) {
-        try {
-          const movieId = parseInt(id);
-          if (!isNaN(movieId)) {
-            const data = await movieService.fetchMovieDetails(movieId);
-            setMovie(data);
-          } else {
-            console.error('Invalid movie ID:', id);
-          }
-        } catch (error) {
-          console.error('Failed to fetch movie details:', error);
-        }
+    if (id) {
+      const movieId = parseInt(id);
+      if (!isNaN(movieId)) {
+        fetchMovieDetails(movieId);
       }
-    };
+    }
+  }, [id, fetchMovieDetails]);
 
-    fetchDetails();
-  }, [id]);
-
-  if (!movie) return <div>Loading...</div>;
+  if (!selectedMovie) return <div>Loading...</div>;
 
   return (
     <Root>
-      <Image src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`} alt={movie.title} />
+      <Image src={`https://image.tmdb.org/t/p/w500${selectedMovie.backdrop_path}`} alt={selectedMovie.title} />
       <Column>
-        <h1>{movie.title}</h1>
-        <p>{movie.overview}</p>
+        <h1>{selectedMovie.title}</h1>
+        <p>{selectedMovie.overview}</p>
       </Column>
     </Root>
   );

@@ -9,11 +9,11 @@ interface Movie {
   vote_average: number;
 }
 
-interface MovieCardProps {
+interface Props {
   movie: Movie;
 }
 
-export const MovieCard: React.FC<MovieCardProps> = (props) => {
+export const MovieCard: React.FC<Props> = (props) => {
   const { movie } = props;
 
   return (
