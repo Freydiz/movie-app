@@ -1,1 +1,2 @@
-export * from './movie-context';
+export * from './movie-details-context';
+export * from './movies-list-context';

@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { useMovies } from '../contexts';
+import { useMovieDetails } from '../contexts';
 
 export const MovieDetailPage: React.FC = () => {
   const { id } = useParams<string>();
-  const { selectedMovie, fetchMovieDetails } = useMovies();
+  const { selectedMovie, fetchMovieDetails, clearSelectedMovie } = useMovieDetails();
 
   useEffect(() => {
+    clearSelectedMovie();
+
     if (id) {
       const movieId = parseInt(id);
       if (!isNaN(movieId)) {

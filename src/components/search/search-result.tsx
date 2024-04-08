@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { MovieCard } from '../movie-card';
-import { useMovies } from '../../contexts';
+import { useMoviesList } from '../../contexts';
 import styled from 'styled-components';
 
 export const SearchResult: React.FC = () => {
-  const { movies } = useMovies();
+  const { movies } = useMoviesList();
 
   return (
     <Grid>

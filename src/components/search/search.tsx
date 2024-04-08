@@ -1,27 +1,20 @@
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-interface Props {
-  onSearch: (query: string) => void;
-}
-
-export const Search: React.FC<Props> = (props) => {
-  const { onSearch } = props;
-
-  const [query, setQuery] = useState('');
+export const Search: React.FC = () => {
+  const navigate = useNavigate();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.target.value);
-  };
+    const query = event.target.value;
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    onSearch(query);
+    if (query.length >= 3) {
+      navigate(`/?search=${query}`);
+    }
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Input type="text" placeholder="Search for movies..." value={query} onChange={handleInputChange} />
+    <Form>
+      <Input type="text" placeholder="Search for movies..." onChange={handleInputChange} />
     </Form>
   );
 };
