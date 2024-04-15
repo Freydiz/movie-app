@@ -1,20 +1,33 @@
-import { useNavigate } from 'react-router-dom';
+import { useCallback, useState } from 'react';
 import styled from 'styled-components';
+import { useMoviesList } from '../../contexts';
 
 export const Search: React.FC = () => {
-  const navigate = useNavigate();
+  const [inputValue, setInputValue] = useState('');
+  const { fetchMovies, setMovies } = useMoviesList();
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const query = event.target.value;
+  const handleInputChange = useCallback(
+    async (event: React.ChangeEvent<HTMLInputElement>) => {
+      const query = event.target.value;
+      setInputValue(query);
 
-    if (query.length >= 3) {
-      navigate(`/?search=${query}`);
-    }
-  };
+      if (query.length >= 3) {
+        try {
+          await fetchMovies(query);
+
+          window.history.pushState({}, '', `/?search=${query}`);
+        } catch (error) {
+          console.error('Error fetching movies:', error);
+          setMovies([]);
+        }
+      }
+    },
+    [fetchMovies, setMovies],
+  );
 
   return (
     <Form>
-      <Input type="text" placeholder="Search for movies..." onChange={handleInputChange} />
+      <Input type="text" value={inputValue} placeholder="Search for movies..." onChange={handleInputChange} />
     </Form>
   );
 };

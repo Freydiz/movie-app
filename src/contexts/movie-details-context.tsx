@@ -28,7 +28,7 @@ export const MovieDetailsProvider: React.FC<MovieDetailsContextProps> = (props) 
     }
   }, []);
 
-  const clearSelectedMovie = () => setSelectedMovie(null);
+  const clearSelectedMovie = useCallback(() => setSelectedMovie(null), []);
 
   return (
     <MovieDetailsContext.Provider value={{ selectedMovie, fetchMovieDetails, clearSelectedMovie }}>

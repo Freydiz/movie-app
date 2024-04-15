@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Layout, Home, MovieDetailPage } from './pages';
+import { MovieDetailsProvider } from './contexts';
 
 function App() {
   return (
@@ -7,7 +8,14 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/movie/:id" element={<MovieDetailPage />} />
+          <Route
+            path="/movie/:id"
+            element={
+              <MovieDetailsProvider>
+                <MovieDetailPage />
+              </MovieDetailsProvider>
+            }
+          />
         </Route>
       </Routes>
     </BrowserRouter>

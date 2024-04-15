@@ -8,8 +8,6 @@ export const MovieDetailPage: React.FC = () => {
   const { selectedMovie, fetchMovieDetails, clearSelectedMovie } = useMovieDetails();
 
   useEffect(() => {
-    clearSelectedMovie();
-
     if (id) {
       const movieId = parseInt(id);
       if (!isNaN(movieId)) {
@@ -17,6 +15,12 @@ export const MovieDetailPage: React.FC = () => {
       }
     }
   }, [id, fetchMovieDetails]);
+
+  useEffect(() => {
+    return () => {
+      clearSelectedMovie();
+    };
+  }, []);
 
   if (!selectedMovie) return <div>Loading...</div>;
 
