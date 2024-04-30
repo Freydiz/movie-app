@@ -1,10 +1,26 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useSearchParams } from 'react-router-dom';
 import { useMoviesList } from '../../contexts';
 
 export const Search: React.FC = () => {
-  const [inputValue, setInputValue] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialQuery = searchParams.get('search') || '';
+  const [inputValue, setInputValue] = useState(initialQuery);
   const { fetchMovies, setMovies } = useMoviesList();
+
+  // Update input field and perform search if there's a query in the URL
+  useEffect(() => {
+    if (initialQuery) {
+      fetchMovies(initialQuery).catch((error) => {
+        console.error('Error fetching movies:', error);
+        setMovies([]);
+      });
+    } else {
+      setMovies([]);
+      setInputValue('');
+    }
+  }, [initialQuery, fetchMovies, setMovies]);
 
   const handleInputChange = useCallback(
     async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -14,15 +30,17 @@ export const Search: React.FC = () => {
       if (query.length >= 3) {
         try {
           await fetchMovies(query);
-
-          window.history.pushState({}, '', `/?search=${query}`);
+          setSearchParams({ search: query }); // Update the URL with the search term
         } catch (error) {
           console.error('Error fetching movies:', error);
           setMovies([]);
         }
+      } else {
+        setMovies([]);
+        setSearchParams({}); // Clear search parameters from URL
       }
     },
-    [fetchMovies, setMovies],
+    [fetchMovies, setMovies, setSearchParams],
   );
 
   return (
