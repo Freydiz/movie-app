@@ -18,7 +18,9 @@ export const Search: React.FC = () => {
       });
     } else {
       setMovies([]);
-      setInputValue('');
+      if (inputValue.length > 3) {
+        setInputValue('');
+      }
     }
   }, [initialQuery, fetchMovies, setMovies]);
 
@@ -43,9 +45,21 @@ export const Search: React.FC = () => {
     [fetchMovies, setMovies, setSearchParams],
   );
 
+  const handleInputBlur = useCallback(() => {
+    if (inputValue.length > 0 && inputValue.length < 3) {
+      setInputValue(''); // Clear input value if less than 3 characters
+    }
+  }, [inputValue, setSearchParams]);
+
   return (
     <Form>
-      <Input type="text" value={inputValue} placeholder="Search for movies..." onChange={handleInputChange} />
+      <Input
+        type="text"
+        value={inputValue}
+        placeholder="Search for movies..."
+        onChange={handleInputChange}
+        onBlur={handleInputBlur}
+      />
     </Form>
   );
 };
