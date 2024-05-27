@@ -10,17 +10,11 @@ export const MovieDetailPage: React.FC = () => {
   useEffect(() => {
     if (id) {
       const movieId = parseInt(id);
-      if (!isNaN(movieId)) {
-        fetchMovieDetails(movieId);
-      }
+      if (!isNaN(movieId)) fetchMovieDetails(movieId);
     }
   }, [id, fetchMovieDetails]);
 
-  useEffect(() => {
-    return () => {
-      clearSelectedMovie();
-    };
-  }, []);
+  useEffect(() => clearSelectedMovie, [clearSelectedMovie]);
 
   if (!selectedMovie) return <div>Loading...</div>;
 

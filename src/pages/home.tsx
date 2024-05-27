@@ -1,7 +1,7 @@
 import { Search, SearchResult } from '../components';
 import styled from 'styled-components';
 
-export const Home = () => {
+export const Home: React.FC = () => {
   return (
     <Root>
       <Search />

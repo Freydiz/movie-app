@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Footer = () => {
+export const Footer: React.FC = () => {
   return (
     <Root>
       <h3>Footer</h3>

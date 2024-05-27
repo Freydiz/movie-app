@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Logo } from '../../assets';
 
-export const Header = () => {
+export const Header: React.FC = () => {
   return (
     <Root>
       <LogoWrapper to="/">

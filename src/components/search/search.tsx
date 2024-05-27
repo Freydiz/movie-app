@@ -49,7 +49,7 @@ export const Search: React.FC = () => {
     if (inputValue.length > 0 && inputValue.length < 3) {
       setInputValue(''); // Clear input value if less than 3 characters
     }
-  }, [inputValue, setSearchParams]);
+  }, [inputValue]);
 
   return (
     <Form>
