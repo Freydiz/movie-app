@@ -9,57 +9,33 @@ export const Search: React.FC = () => {
   const [inputValue, setInputValue] = useState(initialQuery);
   const { fetchMovies, setMovies } = useMoviesList();
 
-  // Update input field and perform search if there's a query in the URL
   useEffect(() => {
     if (initialQuery) {
-      fetchMovies(initialQuery).catch((error) => {
-        console.error('Error fetching movies:', error);
-        setMovies([]);
-      });
+      fetchMovies(initialQuery);
     } else {
       setMovies([]);
-      if (inputValue.length > 3) {
-        setInputValue('');
-      }
     }
   }, [initialQuery, fetchMovies, setMovies]);
 
   const handleInputChange = useCallback(
-    async (event: React.ChangeEvent<HTMLInputElement>) => {
-      const query = event.target.value;
-      setInputValue(query);
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const value = event.target.value;
+      setInputValue(value);
 
-      if (query.length >= 3) {
-        try {
-          await fetchMovies(query);
-          setSearchParams({ search: query }); // Update the URL with the search term
-        } catch (error) {
-          console.error('Error fetching movies:', error);
-          setMovies([]);
-        }
+      if (value.length >= 3) {
+        fetchMovies(value);
+        setSearchParams({ search: value });
       } else {
         setMovies([]);
-        setSearchParams({}); // Clear search parameters from URL
+        setSearchParams({});
       }
     },
-    [fetchMovies, setMovies, setSearchParams],
+    [fetchMovies, setSearchParams, setMovies],
   );
-
-  const handleInputBlur = useCallback(() => {
-    if (inputValue.length > 0 && inputValue.length < 3) {
-      setInputValue(''); // Clear input value if less than 3 characters
-    }
-  }, [inputValue]);
 
   return (
     <Form>
-      <Input
-        type="text"
-        value={inputValue}
-        placeholder="Search for movies..."
-        onChange={handleInputChange}
-        onBlur={handleInputBlur}
-      />
+      <Input type="text" value={inputValue} placeholder="Search for movies..." onChange={handleInputChange} />
     </Form>
   );
 };
@@ -75,5 +51,8 @@ const Form = styled.form`
 const Input = styled.input`
   width: 100%;
   padding: 10px;
-  border: 1px solid;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
 `;
